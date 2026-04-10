@@ -45,14 +45,11 @@ export const LeadCapture = ({ onSubmit, quizAnswers }: LeadCaptureProps) => {
       nome: data.name,
       email: data.email,
       whatsapp: data.whatsapp,
-      pontuacao: totalScore,
-      quando_tentar_processo: getAnswer(0),
-      ja_tentou_antes: getAnswer(1),
-      tem_tema_projeto: getAnswer(2),
-      contatou_orientadores: getAnswer(3),
-      etapa_preocupa: getAnswer(4),
-      horas_estudo_semanal: getAnswer(5),
-      prioridade_mestrado: getAnswer(6),
+      pontuacao_potencial_perda: totalScore,
+      qtd_clientes_ativos: getAnswer(0),
+      ja_ofereceu_seguro: getAnswer(1),
+      clientes_com_seguro: getAnswer(2),
+      estimativa_conversao: getAnswer(3),
       meta: {
         page_url: typeof window !== 'undefined' ? window.location.href : '',
         sent_at: new Date().toISOString(),
@@ -135,7 +132,7 @@ export const LeadCapture = ({ onSubmit, quizAnswers }: LeadCaptureProps) => {
               Quase lá!
             </h2>
             <p className="text-muted-foreground">
-              Para receber seu resultado personalizado e o plano de 45 dias gratuito, precisamos apenas de algumas informações:
+              Para calcular e revelar o tamanho do seu prejuízo atual e receber as dicas de como recuperar esse dinheiro na sua carteira, precisamos apenas de algumas informações:
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { QuizQuestion } from "@/components/QuizQuestion";
 import { LeadCapture } from "@/components/LeadCapture";
@@ -6,8 +6,9 @@ import { ResultPage } from "@/components/ResultPage";
 import { questions } from "@/data/questions";
 import { calculateResult } from "@/utils/quiz";
 import { UserData, QuizAnswer } from "@/types/quiz";
+import { Loader2 } from "lucide-react";
 
-type QuizState = 'hero' | 'quiz' | 'lead-capture' | 'result';
+type QuizState = 'hero' | 'quiz' | 'lead-capture' | 'calculating' | 'result';
 
 const Index = () => {
   const [state, setState] = useState<QuizState>('hero');
@@ -44,11 +45,24 @@ const Index = () => {
 
   const handleLeadSubmit = (data: UserData) => {
     setUserData(data);
-    const totalScore = answers.reduce((sum, answer) => sum + answer.points, 0);
-    const quizResult = calculateResult(totalScore);
+    
+    // We only care about the points from the first question (base size) for the final result
+    const baseSizeAnswer = answers.find(a => a.questionId === 1);
+    const score = baseSizeAnswer ? baseSizeAnswer.points : 50; 
+    
+    const quizResult = calculateResult(score);
     setResult(quizResult);
-    setState('result');
+    setState('calculating');
   };
+
+  useEffect(() => {
+    if (state === 'calculating') {
+      const timer = setTimeout(() => {
+        setState('result');
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
 
   const handleRestart = () => {
     setState('hero');
@@ -75,6 +89,17 @@ const Index = () => {
     
     case 'lead-capture':
       return <LeadCapture onSubmit={handleLeadSubmit} quizAnswers={answers} />;
+      
+    case 'calculating':
+      return (
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+          <Loader2 className="w-16 h-16 text-red-500 animate-spin mb-6" />
+          <h2 className="text-2xl font-bold text-foreground mb-2 animate-pulse">
+            Analisando prejuízo na sua base...
+          </h2>
+          <p className="text-muted-foreground">Cruzando dados de conversão e mercado.</p>
+        </div>
+      );
     
     case 'result':
       return (

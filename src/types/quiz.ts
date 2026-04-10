@@ -13,10 +13,11 @@ export interface Option {
 
 export interface QuizResult {
   score: number;
-  level: 'not-ready' | 'almost-ready' | 'ready';
+  level: string;
   title: string;
   message: string;
   ctaText: string;
+  financialLoss?: string;
 }
 
 export interface QuizAnswer {

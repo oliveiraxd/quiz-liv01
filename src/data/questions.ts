@@ -3,68 +3,43 @@ import { Question } from '../types/quiz';
 export const questions: Question[] = [
   {
     id: 1,
-    text: "Quando você pretende tentar o processo seletivo?",
+    text: "Para começarmos direto ao ponto: quantos clientes ativos você tem na sua carteira hoje?",
     options: [
-      { text: "Nos próximos 3 meses", points: 3 },
-      { text: "De 3 a 6 meses", points: 2 },
-      { text: "De 6 a 12 meses", points: 1 },
-      { text: "Sem prazo definido", points: 0 }
+      { text: "Até 50 clientes", points: 50 },
+      { text: "Entre 50 e 100 clientes", points: 100 },
+      { text: "Entre 100 e 200 clientes", points: 200 },
+      { text: "Entre 200 e 300 clientes", points: 300 },
+      { text: "Mais de 300 clientes", points: 500 } // using 500 max limit to categorize
     ]
   },
   {
     id: 2,
-    text: "Você já tentou algum processo seletivo antes?",
+    text: "Seja sincero: para quantos desses clientes você já ofereceu ativamente um Seguro de Vida?",
     options: [
-      { text: "Sim", points: 2 },
-      { text: "Não", points: 0 }
+      { text: "Ainda não ofereci para nenhum (0%)", points: 0 },
+      { text: "Para menos de 20% da base", points: 0 },
+      { text: "Entre 20% e 50% da carteira", points: 0 },
+      { text: "Para mais da metade deles", points: 0 }
     ]
   },
   {
     id: 3,
-    text: "Você já tem um tema ou ideia de projeto definido?",
+    text: "E olhando agora para a realidade... hoje, quantos clientes já têm Seguro de Vida fechado com você?",
     options: [
-      { text: "Sim, definido", points: 2 },
-      { text: "Tenho ideias, mas não organizei", points: 1 },
-      { text: "Não tenho", points: 0 }
+      { text: "Nenhum", points: 0 },
+      { text: "Menos de 10 clientes", points: 0 },
+      { text: "Entre 10 e 30 clientes", points: 0 },
+      { text: "Mais de 30 clientes", points: 0 }
     ]
   },
   {
     id: 4,
-    text: "Você já entrou em contato com possíveis orientadores?",
+    text: "Se hoje você tivesse algo mastigado e uma abordagem garantida nas mãos, quantos desses clientes você acredita que topariam fechar com você?",
     options: [
-      { text: "Sim", points: 2 },
-      { text: "Não", points: 0 }
-    ]
-  },
-  {
-    id: 5,
-    text: "Qual etapa do processo mais te preocupa?",
-    allowMultiple: true,
-    maxPoints: 2,
-    options: [
-      { text: "Prova escrita", points: 1 },
-      { text: "Projeto de pesquisa", points: 1 },
-      { text: "Entrevista", points: 1 },
-      { text: "Edital/documentos", points: 1 }
-    ]
-  },
-  {
-    id: 6,
-    text: "Quantas horas por semana você consegue dedicar aos estudos?",
-    options: [
-      { text: "Até 3h", points: 0 },
-      { text: "4 a 6h", points: 1 },
-      { text: "7 a 10h", points: 2 },
-      { text: "Mais de 10h", points: 2 }
-    ]
-  },
-  {
-    id: 7,
-    text: "Qual sua prioridade pessoal para entrar no mestrado agora?",
-    options: [
-      { text: "Baixa", points: 0 },
-      { text: "Média", points: 1 },
-      { text: "Alta", points: 2 }
+      { text: "Não tenho certeza, talvez menos de 20%", points: 0 },
+      { text: "Entre 20% e 50%", points: 0 },
+      { text: "Tenho certeza que mais da metade (50%+)", points: 0 },
+      { text: "Pelo menos garantiria um não, quase 100% dariam ouvidos", points: 0 }
     ]
   }
 ];
