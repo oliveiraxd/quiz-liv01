@@ -3,60 +3,80 @@ import { HeroSection } from "@/components/HeroSection";
 import { QuizQuestion } from "@/components/QuizQuestion";
 import { LeadCapture } from "@/components/LeadCapture";
 import { ResultPage } from "@/components/ResultPage";
-import { questions } from "@/data/questions";
+import { questionsFase1, questionsFase2 } from "@/data/questions";
 import { calculateResult } from "@/utils/quiz";
 import { UserData, QuizAnswer } from "@/types/quiz";
 import { Loader2 } from "lucide-react";
 
-type QuizState = 'hero' | 'quiz' | 'lead-capture' | 'calculating' | 'result';
+type QuizState = 'intro' | 'quiz1' | 'loading' | 'result' | 'quiz2' | 'capture';
 
 const Index = () => {
-  const [state, setState] = useState<QuizState>('hero');
+  const [state, setState] = useState<QuizState>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
+  const [answersFase1, setAnswersFase1] = useState<QuizAnswer[]>([]);
+  const [answersFase2, setAnswersFase2] = useState<QuizAnswer[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [result, setResult] = useState<any>(null);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentQuestionIndex, state]);
+
   const handleStartQuiz = () => {
-    setState('quiz');
+    setState('quiz1');
     setCurrentQuestionIndex(0);
-    setAnswers([]);
+    setAnswersFase1([]);
+    setAnswersFase2([]);
   };
 
-  const handleAnswer = (answer: QuizAnswer) => {
-    const newAnswers = [...answers, answer];
-    setAnswers(newAnswers);
+  const handleAnswerFase1 = (answer: QuizAnswer) => {
+    const newAnswers = [...answersFase1, answer];
+    setAnswersFase1(newAnswers);
 
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < questionsFase1.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      setState('lead-capture');
+      // Find score from question 1 (id: 1)
+      const baseSizeAnswer = newAnswers.find(a => a.questionId === 1);
+      const score = baseSizeAnswer ? baseSizeAnswer.points : 50; 
+      
+      const quizResult = calculateResult(score);
+      setResult(quizResult);
+      setState('loading');
     }
   };
 
-  const handleBack = () => {
+  const handleAnswerFase2 = (answer: QuizAnswer) => {
+    const newAnswers = [...answersFase2, answer];
+    setAnswersFase2(newAnswers);
+
+    if (currentQuestionIndex < questionsFase2.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setState('capture');
+    }
+  };
+
+  const handleBackFase1 = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
-      setAnswers(answers.slice(0, -1));
+      setAnswersFase1(answersFase1.slice(0, -1));
     } else {
-      setState('hero');
+      setState('intro');
     }
   };
 
-  const handleLeadSubmit = (data: UserData) => {
-    setUserData(data);
-    
-    // We only care about the points from the first question (base size) for the final result
-    const baseSizeAnswer = answers.find(a => a.questionId === 1);
-    const score = baseSizeAnswer ? baseSizeAnswer.points : 50; 
-    
-    const quizResult = calculateResult(score);
-    setResult(quizResult);
-    setState('calculating');
+  const handleBackFase2 = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setAnswersFase2(answersFase2.slice(0, -1));
+    } else {
+      setState('result');
+    }
   };
 
   useEffect(() => {
-    if (state === 'calculating') {
+    if (state === 'loading') {
       const timer = setTimeout(() => {
         setState('result');
       }, 3000);
@@ -64,40 +84,50 @@ const Index = () => {
     }
   }, [state]);
 
-  const handleRestart = () => {
-    setState('hero');
+  const handleContinueToDiagnosis = () => {
     setCurrentQuestionIndex(0);
-    setAnswers([]);
+    setState('quiz2');
+  };
+
+  const handleLeadSubmit = (data: UserData) => {
+    setUserData(data);
+    // Em uma aplicação real, aqui você mostraria a tela final de agradecimento
+    // ou redirecionaria para uma recompensa em PDF
+    window.location.href = "https://chat.whatsapp.com/Lv7czJrmdD7JjobU5XQqba"; // Link de comunidade/contato
+  };
+
+  const handleRestart = () => {
+    setState('intro');
+    setCurrentQuestionIndex(0);
+    setAnswersFase1([]);
+    setAnswersFase2([]);
     setUserData(null);
     setResult(null);
   };
 
   switch (state) {
-    case 'hero':
+    case 'intro':
       return <HeroSection onStartQuiz={handleStartQuiz} />;
     
-    case 'quiz':
+    case 'quiz1':
       return (
         <QuizQuestion
-          question={questions[currentQuestionIndex]}
+          question={questionsFase1[currentQuestionIndex]}
           currentQuestion={currentQuestionIndex + 1}
-          totalQuestions={questions.length}
-          onAnswer={handleAnswer}
-          onBack={handleBack}
+          totalQuestions={questionsFase1.length}
+          onAnswer={handleAnswerFase1}
+          onBack={handleBackFase1}
         />
       );
     
-    case 'lead-capture':
-      return <LeadCapture onSubmit={handleLeadSubmit} quizAnswers={answers} />;
-      
-    case 'calculating':
+    case 'loading':
       return (
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-          <Loader2 className="w-16 h-16 text-red-500 animate-spin mb-6" />
-          <h2 className="text-2xl font-bold text-foreground mb-2 animate-pulse">
-            Analisando prejuízo na sua base...
+          <Loader2 className="w-16 h-16 text-primary animate-spin mb-6" />
+          <h2 className="text-2xl font-bold text-foreground mb-2 animate-pulse text-center">
+            Calculando o tamanho do seu prejuízo invisível...
           </h2>
-          <p className="text-muted-foreground">Cruzando dados de conversão e mercado.</p>
+          <p className="text-muted-foreground text-center">Cruzando os dados da sua base com o volume de prêmios deixados na mesa no último ano...</p>
         </div>
       );
     
@@ -105,10 +135,23 @@ const Index = () => {
       return (
         <ResultPage
           result={result}
-          userData={userData!}
-          onRestart={handleRestart}
+          onContinue={handleContinueToDiagnosis}
         />
       );
+
+    case 'quiz2':
+      return (
+        <QuizQuestion
+          question={questionsFase2[currentQuestionIndex]}
+          currentQuestion={currentQuestionIndex + 1}
+          totalQuestions={questionsFase2.length}
+          onAnswer={handleAnswerFase2}
+          onBack={handleBackFase2}
+        />
+      );
+
+    case 'capture':
+      return <LeadCapture onSubmit={handleLeadSubmit} quizAnswers={[...answersFase1, ...answersFase2]} />;
 
     default:
       return <HeroSection onStartQuiz={handleStartQuiz} />;

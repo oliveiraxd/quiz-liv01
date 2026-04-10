@@ -50,6 +50,12 @@ export const LeadCapture = ({ onSubmit, quizAnswers }: LeadCaptureProps) => {
       ja_ofereceu_seguro: getAnswer(1),
       clientes_com_seguro: getAnswer(2),
       estimativa_conversao: getAnswer(3),
+      puxa_assunto_auto: getAnswer(4),
+      cadencia_automatica: getAnswer(5),
+      lida_com_objecoes: getAnswer(6),
+      perde_por_preco: getAnswer(7),
+      frequencia_abordagem: getAnswer(8),
+      crm_avisa: getAnswer(9),
       meta: {
         page_url: typeof window !== 'undefined' ? window.location.href : '',
         sent_at: new Date().toISOString(),
@@ -129,10 +135,10 @@ export const LeadCapture = ({ onSubmit, quizAnswers }: LeadCaptureProps) => {
               <Gift className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Quase lá!
+              Seu Diagnóstico da Operação de Vendas está pronto.
             </h2>
             <p className="text-muted-foreground">
-              Para calcular e revelar o tamanho do seu prejuízo atual e receber as dicas de como recuperar esse dinheiro na sua carteira, precisamos apenas de algumas informações:
+              Para liberar o plano de ação personalizado focando em estancar esse seu prejuízo invisível e receber o modelo de roteiro de abordagem ideal para sua corretora, preencha abaixo:
             </p>
           </div>
 
