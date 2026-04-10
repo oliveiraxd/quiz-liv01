@@ -4,7 +4,7 @@ import { QuizQuestion } from "@/components/QuizQuestion";
 import { LeadCapture } from "@/components/LeadCapture";
 import { ResultPage } from "@/components/ResultPage";
 import { questionsFase1, questionsFase2 } from "@/data/questions";
-import { calculateResult } from "@/utils/quiz";
+import { calculateResultPhase1 } from "@/utils/quiz";
 import { UserData, QuizAnswer } from "@/types/quiz";
 import { Loader2 } from "lucide-react";
 
@@ -36,11 +36,10 @@ const Index = () => {
     if (currentQuestionIndex < questionsFase1.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Find score from question 1 (id: 1)
       const baseSizeAnswer = newAnswers.find(a => a.questionId === 1);
       const score = baseSizeAnswer ? baseSizeAnswer.points : 50; 
       
-      const quizResult = calculateResult(score);
+      const quizResult = calculateResultPhase1(score);
       setResult(quizResult);
       setState('loading');
     }
@@ -79,30 +78,21 @@ const Index = () => {
     if (state === 'loading') {
       const timer = setTimeout(() => {
         setState('result');
-      }, 3000);
+      }, 2000); // Exato: "Duração: 2 segundos (simulado)"
       return () => clearTimeout(timer);
     }
   }, [state]);
 
   const handleContinueToDiagnosis = () => {
+    // transição para etapa 2
     setCurrentQuestionIndex(0);
     setState('quiz2');
   };
 
   const handleLeadSubmit = (data: UserData) => {
     setUserData(data);
-    // Em uma aplicação real, aqui você mostraria a tela final de agradecimento
-    // ou redirecionaria para uma recompensa em PDF
-    window.location.href = "https://chat.whatsapp.com/Lv7czJrmdD7JjobU5XQqba"; // Link de comunidade/contato
-  };
-
-  const handleRestart = () => {
-    setState('intro');
-    setCurrentQuestionIndex(0);
-    setAnswersFase1([]);
-    setAnswersFase2([]);
-    setUserData(null);
-    setResult(null);
+    // Submit hook can handle redirect/final alert later
+    window.location.href = "https://chat.whatsapp.com/Lv7czJrmdD7JjobU5XQqba"; 
   };
 
   switch (state) {
@@ -123,11 +113,13 @@ const Index = () => {
     case 'loading':
       return (
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-          <Loader2 className="w-16 h-16 text-primary animate-spin mb-6" />
-          <h2 className="text-2xl font-bold text-foreground mb-2 animate-pulse text-center">
+          <Loader2 className="w-12 h-12 text-primary animate-spin mb-6" />
+          <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2 text-center">
             Calculando o tamanho do seu prejuízo invisível...
           </h2>
-          <p className="text-muted-foreground text-center">Cruzando os dados da sua base com o volume de prêmios deixados na mesa no último ano...</p>
+          <p className="text-muted-foreground text-center">
+            Analisando sua carteira e estimando oportunidades não aproveitadas
+          </p>
         </div>
       );
     

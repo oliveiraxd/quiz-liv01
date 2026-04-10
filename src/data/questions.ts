@@ -3,7 +3,7 @@ import { Question } from '../types/quiz';
 export const questionsFase1: Question[] = [
   {
     id: 1,
-    text: "Para começarmos direto ao ponto: quantos clientes ativos você tem na sua carteira hoje?",
+    text: "Quantos clientes ativos você tem na sua carteira?",
     options: [
       { text: "Até 50 clientes", points: 50 },
       { text: "Entre 50 e 100 clientes", points: 100 },
@@ -14,17 +14,17 @@ export const questionsFase1: Question[] = [
   },
   {
     id: 2,
-    text: "Seja sincero: para quantos desses clientes você já ofereceu ativamente um Seguro de Vida?",
+    text: "Quantos desses clientes você já abordou sobre seguro de vida?",
     options: [
-      { text: "Ainda não ofereci para nenhum (0%)", points: 0 },
-      { text: "Para menos de 20% da base", points: 0 },
-      { text: "Entre 20% e 50% da carteira", points: 0 },
-      { text: "Para mais da metade deles", points: 0 }
+      { text: "Nenhum", points: 0 },
+      { text: "Menos de 20%", points: 0 },
+      { text: "Entre 20% e 50%", points: 0 },
+      { text: "Mais de 50%", points: 0 }
     ]
   },
   {
     id: 3,
-    text: "E olhando agora para a realidade... hoje, quantos clientes já têm Seguro de Vida fechado com você?",
+    text: "Hoje, quantos clientes da sua base têm seguro de vida com você?",
     options: [
       { text: "Nenhum", points: 0 },
       { text: "Menos de 10 clientes", points: 0 },
@@ -34,12 +34,12 @@ export const questionsFase1: Question[] = [
   },
   {
     id: 4,
-    text: "Se hoje você tivesse algo mastigado e uma abordagem garantida nas mãos, quantos desses clientes você acredita que topariam fechar com você?",
+    text: "Se você tivesse um processo estruturado, quantos clientes da sua base você acredita que contratariam seguro de vida?",
     options: [
-      { text: "Não tenho certeza, talvez menos de 20%", points: 0 },
+      { text: "Nenhum", points: 0 },
+      { text: "Menos de 20%", points: 0 },
       { text: "Entre 20% e 50%", points: 0 },
-      { text: "Tenho certeza que mais da metade (50%+)", points: 0 },
-      { text: "Pelo menos garantiria um não, quase 100% dariam ouvidos", points: 0 }
+      { text: "Mais de 50%", points: 0 }
     ]
   }
 ];
@@ -47,59 +47,74 @@ export const questionsFase1: Question[] = [
 export const questionsFase2: Question[] = [
   {
     id: 5,
-    text: "Hoje, como você puxa o assunto \"seguro de vida\" com clientes de Auto ou Residencial?",
+    text: "Hoje, qual dessas frases mais descreve sua realidade com seguro de vida?",
     options: [
-      { text: "Não costumo puxar esse assunto", points: 0 },
-      { text: "Mando mensagem fria (tipo panfleto digital)", points: 1 },
-      { text: "Aproveito a janela de renovação", points: 2 }
+      { text: "Tenho carteira, mas não vendo vida como poderia", points: 10 },
+      { text: "Já vendo alguma coisa, mas sem previsibilidade", points: 8 },
+      { text: "Sei que deveria vender mais, mas adio esse movimento", points: 7 },
+      { text: "Ainda não tratei isso como prioridade", points: 3 }
     ]
   },
   {
     id: 6,
-    text: "Você tem alguma cadência automática/fluxo pronto ou oferece no \"feeling\"?",
+    text: "Você já oferece seguro de vida para seus clientes?",
     options: [
-      { text: "Tenho tudo automatizado no meu funil", points: 2 },
-      { text: "Faço manualmente quando lembro/consigo", points: 1 },
-      { text: "Ainda não faço esse tipo de controle", points: 0 }
+      { text: "Sim, com frequência", points: 10 },
+      { text: "Sim, mas sem consistência", points: 7 },
+      { text: "Já tentei, mas não consegui manter", points: 5 },
+      { text: "Nunca ofereci", points: 2 }
     ]
   },
   {
     id: 7,
-    text: "Seu time de vendas (ou você) se sente 100% confortável lidando com objeções difíceis sobre morte e invalidez?",
+    text: "Quais são suas maiores dificuldades hoje para vender seguro de vida?",
+    type: 'checkbox',
+    allowMultiple: true,
+    maxPoints: 10,
     options: [
-      { text: "Sim, rebatemos no automático", points: 2 },
-      { text: "Parcialmente (as vezes trava um pouco na venda)", points: 1 },
-      { text: "Tenho/Temos dificuldade para lidar de forma natural", points: 0 }
+      { text: "Não consigo agendar reuniões", points: 4 },
+      { text: "Travo nas objeções dos clientes", points: 3 },
+      { text: "Não sei conduzir bem a conversa", points: 3 },
+      { text: "Não sei montar ou apresentar a proposta", points: 2 },
+      { text: "Falta rotina / organização comercial", points: 2 },
+      { text: "Falta tempo", points: 1 },
+      { text: "Não vejo muito potencial na minha base", points: 0 }
     ]
   },
   {
     id: 8,
-    text: "Quantas propostas de Vida você perde pura e simplesmente por argumentação de preço do cliente?",
+    text: "Você tem um processo estruturado para vender seguro de vida?",
     options: [
-      { text: "Quase todas as que eu oferto esbarram em preço", points: 0 },
-      { text: "Mais ou menos metade das negociações", points: 1 },
-      { text: "Raramente, sei vender valor", points: 2 }
+      { text: "Sim, tenho processo, rotina e etapas definidas", points: 10 },
+      { text: "Tenho parcialmente, mas não consigo executar sempre", points: 6 },
+      { text: "Não, hoje faço tudo no improviso", points: 2 }
     ]
   },
   {
     id: 9,
-    text: "Com qual frequência vocês abordam cada cliente antigo da base sobre o assunto Vida?",
+    text: "Em quanto tempo você quer começar a aumentar sua comissão com seguro de vida?",
     options: [
-      { text: "Nunca os abordei sobre isso", points: 0 },
-      { text: "Talvez tenha acontecido uma vez na vida", points: 1 },
-      { text: "Ao menos uma vez por ano", points: 2 }
+      { text: "Nos próximos 30 dias", points: 10 },
+      { text: "Nos próximos 2 a 3 meses", points: 7 },
+      { text: "Ainda este ano", points: 5 },
+      { text: "Sem pressa, estou só entendendo melhor", points: 2 }
     ]
   },
   {
     id: 10,
-    text: "O seu sistema de gestão de corretora (CRM) te avisa automaticamente quem são os clientes ideais para você vender Vida hoje?",
+    text: "Você teria disponibilidade para participar de uma reunião estratégica de 30 minutos nos próximos 3 dias?",
     options: [
-      { text: "Sim, tenho os números mastigadinhos", points: 2 },
-      { text: "Não, costumo garimpar a ouro para achar eles", points: 1 },
-      { text: "Tenho meus dados totalmente desorganizados", points: 0 }
+      { text: "Sim", points: 10 },
+      { text: "Talvez", points: 5 },
+      { text: "Não", points: 0 }
     ]
+  },
+  {
+    id: 11,
+    text: "Se eu puder te ajudar a destravar a venda de seguro de vida, o que mais faria diferença pra você hoje?",
+    type: 'text',
+    options: []
   }
 ];
 
-// Mantenha questions retrocompatível por segurança, se precisar
 export const questions = [...questionsFase1, ...questionsFase2];

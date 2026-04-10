@@ -1,6 +1,7 @@
 export interface Question {
   id: number;
   text: string;
+  type?: 'radio' | 'checkbox' | 'text';
   options: Option[];
   allowMultiple?: boolean;
   maxPoints?: number;
@@ -25,6 +26,7 @@ export interface QuizAnswer {
   questionText: string;
   selectedAnswers: string[];
   points: number;
+  openText?: string;
 }
 
 export interface UserData {
