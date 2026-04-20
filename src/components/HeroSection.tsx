@@ -30,9 +30,6 @@ export const HeroSection = ({
         </Button>
 
         <div className="text-center mt-6">
-          <p className="text-sm text-foreground leading-relaxed max-w-2xl mx-auto opacity-70">
-            A cada 100 clientes encostados que você possui na sua base, existe R$ 50.750,00 de puro faturamento inexplorado nos próximos 2 anos.
-          </p>
           <div className="flex justify-center items-center gap-2 text-sm text-muted-foreground mt-4">
             <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             Leva menos de 1 minuto
