@@ -19,13 +19,14 @@ export const HeroSection = ({
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
             Descubra exatamente o tamanho do <span className="text-primary">vazamento financeiro</span> na sua carteira de clientes hoje.
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Você não precisa de novas leads. Responda a 4 perguntas simples e calcule em menos de 1 minuto quanto de dinheiro vivo você está deixando na mesa todo mês por ignorar o Seguro de Vida.
-          </p>
+          <h2 className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            Você não precisa de novos clientes.<br />
+            Responda a 4 perguntas simples e calcule em menos de 1 minuto quanto dinheiro você está deixando na mesa todo mês por ignorar o Seguro de Vida na sua corretora.
+          </h2>
         </div>
 
         <Button onClick={onStartQuiz} size="lg" className="text-lg px-8 py-4 h-auto font-semibold mb-8">
-          Calcular Meu Prejuízo Invisível
+          Calcular minha perda financeira
         </Button>
 
         <div className="text-center mt-6">
