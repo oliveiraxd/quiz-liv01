@@ -10,9 +10,8 @@ export const calculateResultPhase1 = (points: number): QuizResult => {
 
   return {
     score: points,
-    level: '',
-    title: `Você pode estar deixando ${financialLoss} na mesa nos próximos 2 anos.`,
-    message: 'A cada 100 clientes na sua base, você adiciona aproximadamente R$ 50.750 em potencial nos próximos 2 anos.',
+    title: `Você está perdendo ${financialLoss} a cada ano`,
+    message: 'A cada 100 clientes da sua carteira, você adiciona aproximadamente R$ 50.750 no financeiro da sua corretora',
     ctaText: 'Continuar',
     financialLoss: financialLoss
   };
