@@ -3,7 +3,7 @@ import { Question } from '../types/quiz';
 export const questionsFase1: Question[] = [
   {
     id: 1,
-    text: "Quantos clientes ativos você tem na sua carteira?",
+    text: "Quantos clientes você tem na sua carteira?",
     options: [
       { text: "Até 50 clientes", points: 50 },
       { text: "Entre 50 e 100 clientes", points: 100 },
@@ -14,7 +14,7 @@ export const questionsFase1: Question[] = [
   },
   {
     id: 2,
-    text: "Quantos desses clientes você já abordou sobre seguro de vida?",
+    text: "Quantos desses clientes você já abordou para seguro de vida?",
     options: [
       { text: "Nenhum", points: 0 },
       { text: "Menos de 20%", points: 0 },
@@ -24,7 +24,7 @@ export const questionsFase1: Question[] = [
   },
   {
     id: 3,
-    text: "Hoje, quantos clientes da sua base têm seguro de vida com você?",
+    text: "Hoje, quantos clientes da sua carteira têm seguro de vida com você?",
     options: [
       { text: "Nenhum", points: 0 },
       { text: "Menos de 10 clientes", points: 0 },

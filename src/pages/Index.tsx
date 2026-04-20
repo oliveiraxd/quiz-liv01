@@ -115,7 +115,7 @@ const Index = () => {
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
           <Loader2 className="w-12 h-12 text-primary animate-spin mb-6" />
           <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2 text-center">
-            Calculando o tamanho do seu prejuízo invisível...
+            Calculando o tamanho da perda financeira...
           </h2>
           <p className="text-muted-foreground text-center">
             Analisando sua carteira e estimando oportunidades não aproveitadas
